@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Camera, HeartHandshake, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Camera, Mail, MapPin, MessageCircle } from "lucide-react";
+import BrandLogo from "./brand-logo";
 
 const companyLinks = [
   { label: "About", href: "/about" },
@@ -22,8 +23,7 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-brand-purple-dark text-white">
       <div className="mx-auto max-w-6xl px-6 pt-12 pb-6 sm:pt-16">
         <Link href="/" aria-label="Impact Lives Care home" className="mb-8 inline-flex items-center gap-2.5 rounded-md text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
-          <span className="flex size-10 items-center justify-center rounded-xl bg-white/10"><HeartHandshake className="size-6 text-purple-200" aria-hidden="true" /></span>
-          <span className="text-sm font-bold tracking-[0.06em] sm:text-base">IMPACT LIVES CARE</span>
+          <BrandLogo className="size-28 lg:size-28" />
         </Link>
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-10">

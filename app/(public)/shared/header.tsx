@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HeartHandshake, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
+import BrandLogo from "./brand-logo";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -20,8 +21,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-primary/10 bg-background">
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-6 lg:h-24">
         <Link href="/" aria-label="Impact Lives Care home" className="flex items-center gap-2.5 rounded-md text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/8"><HeartHandshake className="size-6" aria-hidden="true" /></span>
-          <span className="text-sm font-bold tracking-[0.06em] sm:text-base">IMPACT LIVES CARE</span>
+          <BrandLogo />
         </Link>
         <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
           {links.map(({ href, label }) => (
@@ -33,7 +33,8 @@ export default function Header() {
           <SheetTrigger render={<Button variant="outline" size="icon" className="size-10 lg:hidden" />} aria-label="Open navigation menu"><Menu className="size-5" aria-hidden="true" /></SheetTrigger>
           <SheetContent>
             <SheetHeader className="px-6 pt-12">
-              <SheetTitle className="text-primary">Impact Lives Care</SheetTitle>
+              <BrandLogo className="mb-3 size-24 lg:size-24" />
+              <SheetTitle className="sr-only">Impact Lives Care navigation</SheetTitle>
               <SheetDescription>Care that comes to you.</SheetDescription>
             </SheetHeader>
             <nav aria-label="Mobile navigation" className="flex flex-col gap-2 px-6">
