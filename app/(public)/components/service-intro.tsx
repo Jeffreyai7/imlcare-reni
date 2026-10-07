@@ -3,8 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, HeartPulse, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const featuredServices = [
   { title: "Nurse Home Visits", description: "Professional care in your home.", image: "/patient-bp.jpg", alt: "A nurse checking a patient's blood pressure at home" },
@@ -16,6 +18,13 @@ const additionalServices = [
   { title: "Hospital Escort Services", description: "Support for hospital visits.", image: "/escortcare.jpg", alt: "A nurse accompanying a patient in a wheelchair at hospital" },
   { title: "Lab Sample Collection", description: "Sample collection at home.", image: "/samplecollectimage.jpg", alt: "A nurse collecting a blood sample from a patient at home" },
   { title: "Live-in Care", description: "Everyday support, right at home.", image: "/liveincare.jpg", alt: "A caregiver supporting an older woman resting in bed" },
+];
+
+const organizationServices = [
+  { title: "Healthcare Education", icon: BookOpen },
+  { title: "Organizational Wellness", icon: Building2 },
+  { title: "Health Checks", icon: HeartPulse },
+  { title: "Community Outreach", icon: Users },
 ];
 
 const linkClassName = "inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-brand-purple-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring";
@@ -76,6 +85,27 @@ export default function ServiceIntro() {
           </motion.div>
         ))}
       </div>
+      <motion.section
+        {...reveal()}
+        aria-labelledby="organization-care-heading"
+        className="mt-16 rounded-2xl border border-border bg-card px-6 py-12 text-center shadow-sm sm:px-10 sm:py-16"
+      >
+        <p className="text-xs font-semibold tracking-[0.18em] text-primary sm:text-sm">CARE FOR ORGANIZATIONS</p>
+        <h3 id="organization-care-heading" className="mx-auto mt-6 max-w-2xl text-2xl leading-tight font-semibold tracking-tight text-foreground sm:text-3xl">
+          Healthcare solutions for healthier<br className="hidden sm:block" /> workplaces and communities.
+        </h3>
+        <ul className="mx-auto mt-8 grid max-w-xl gap-x-8 gap-y-5 text-left sm:grid-cols-2">
+          {organizationServices.map(({ title, icon: Icon }) => (
+            <li key={title} className="flex items-center gap-3 text-sm font-medium text-body-text">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary"><Icon className="size-5" strokeWidth={1.75} aria-hidden="true" /></span>
+              {title}
+            </li>
+          ))}
+        </ul>
+        <Link href="/contact" className={cn(buttonVariants(), "mt-10 h-12 gap-3 rounded-xl px-6")}>
+          Talk to Our Team<ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+      </motion.section>
     </section>
   );
 }

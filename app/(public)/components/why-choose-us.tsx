@@ -1,8 +1,10 @@
+import { ShieldCheck, UserRound, CalendarClock, HeartHandshake } from "lucide-react";
+
 const carePrinciples = [
-  { number: "01", firstLine: "Vetted &", secondLine: "Professional" },
-  { number: "02", firstLine: "Person-", secondLine: "Centred" },
-  { number: "03", firstLine: "Flexible", secondLine: "Support" },
-  { number: "04", firstLine: "Delivered", secondLine: "With Care" },
+  { icon: ShieldCheck, title: "Vetted & Professional", description: "Care from vetted healthcare professionals." },
+  { icon: UserRound, title: "Person-Centred", description: "Support shaped around you and your needs." },
+  { icon: CalendarClock, title: "Flexible Support", description: "From occasional visits to ongoing care." },
+  { icon: HeartHandshake, title: "Delivered With Care", description: "Compassion and dignity in every interaction." },
 ];
 
 export default function WhyChooseUs() {
@@ -15,7 +17,7 @@ export default function WhyChooseUs() {
         aria-hidden="true"
         className="absolute inset-y-0 -right-6 -left-6 -z-10 bg-brand-purple-dark"
       />
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
           <h2
             id="why-choose-us-heading"
@@ -33,20 +35,19 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <ol className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-white/20 pt-10 sm:mt-14 sm:pt-12 md:grid-cols-4 md:gap-8">
-          {carePrinciples.map(({ number, firstLine, secondLine }) => (
-            <li key={number}>
-              <span aria-hidden="true" className="text-sm font-semibold tracking-[0.12em] text-pink-300">
-                {number}
+        <ul className="mt-12 grid gap-4 border-t border-white/15 pt-10 sm:grid-cols-2 sm:mt-14 sm:pt-12 lg:grid-cols-4">
+          {carePrinciples.map(({ icon: Icon, title, description }) => (
+            <li key={title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <span className="flex size-12 items-center justify-center rounded-xl bg-white/10 text-purple-200 ring-1 ring-white/10">
+                <Icon className="size-6" strokeWidth={1.75} aria-hidden="true" />
               </span>
-              <h3 className="mt-4 text-lg leading-snug font-medium tracking-tight text-white sm:text-xl">
-                {firstLine}
-                <br />
-                {secondLine}
+              <h3 className="mt-5 text-lg leading-snug font-semibold tracking-tight text-white">
+                {title}
               </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">{description}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );
