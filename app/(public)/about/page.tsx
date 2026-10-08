@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, HeartHandshake, ShieldCheck, Sparkles, UserRound } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import PageBanner from "../shared/page-banner";
 
 export const metadata: Metadata = {
   title: "About Us | Impact Lives Care",
@@ -21,16 +22,11 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section aria-labelledby="about-heading" className="pt-4 sm:pt-8">
-        <div className="artwork-light relative isolate py-4 text-center sm:py-8">
-          <p className="text-xs font-semibold tracking-[0.18em] text-primary sm:text-sm">
-            ABOUT IMPACT LIVES CARE
-          </p>
-          <h1 id="about-heading" className="mt-6 text-[clamp(2.5rem,5vw,4rem)] leading-[1.12] font-semibold tracking-[-0.045em] text-foreground">
-            Healthcare with dignity<br />at its heart.
-          </h1>
-        </div>
-        <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-2xl bg-muted sm:mt-12 sm:aspect-[2/1] lg:aspect-[2.4/1]">
+      <PageBanner id="about-heading" eyebrow="ABOUT IMPACT LIVES CARE">
+        Healthcare with dignity<br />at its heart.
+      </PageBanner>
+      <section aria-label="Care at home">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted sm:aspect-[2/1] lg:aspect-[2.4/1]">
           <Image
             src="/imlcare-patient.jpg"
             alt="A nurse sharing a warm moment with an older woman during care at home"
