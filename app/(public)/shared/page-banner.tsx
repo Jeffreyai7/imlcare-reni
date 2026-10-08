@@ -4,10 +4,12 @@ export default function PageBanner({
   id,
   eyebrow,
   children,
+  actions,
 }: {
   id: string;
   eyebrow: string;
   children: ReactNode;
+  actions?: ReactNode;
 }) {
   return (
     <section
@@ -19,6 +21,7 @@ export default function PageBanner({
         <h1 id={id} className="mt-5 text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[1.12] font-semibold tracking-[-0.045em] text-white">
           {children}
         </h1>
+        {actions && <div className="mt-7">{actions}</div>}
       </div>
     </section>
   );
