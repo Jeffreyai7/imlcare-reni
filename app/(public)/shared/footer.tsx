@@ -20,7 +20,7 @@ const linkClassName = "inline-flex items-center gap-2 rounded-sm text-sm text-wh
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-brand-purple-dark text-white">
+    <footer className="artwork-dark relative isolate border-t border-white/10 bg-brand-purple-dark text-white">
       <div className="mx-auto max-w-6xl px-6 pt-12 pb-6 sm:pt-16">
         <Link href="/" aria-label="Impact Lives Care home" className="mb-8 inline-flex items-center gap-2.5 rounded-md text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
           <BrandLogo className="size-28 lg:size-28" />

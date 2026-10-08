@@ -27,7 +27,7 @@ export default function AboutIntro() {
         href="/about"
         className={cn(
           buttonVariants({ variant: "outline" }),
-          "mt-8 h-12 gap-3 rounded-xl border-primary/20 bg-card px-6 text-primary",
+          "mt-8 h-12 gap-3 rounded-xl border-primary/20 bg-card px-6 text-primary [--button-bg:var(--card)] [--button-fg:var(--primary)]",
         )}
       >
         About Us

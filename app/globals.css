@@ -4,6 +4,85 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Small corner accents leave the reading area clear of decorative patterns. */
+.artwork-light::before,
+.artwork-dark::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(100px, 18vw, 260px);
+  height: clamp(80px, 12vw, 160px);
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  mask-image: radial-gradient(ellipse at top right, black, transparent 75%);
+}
+
+.artwork-light::before {
+  background-image: url("/artwork2.webp");
+  background-size: 360px auto;
+  background-position: right top;
+  opacity: 0.04;
+}
+
+.artwork-dark::before {
+  background-image: url("/artwork.png");
+  background-size: 420px auto;
+  background-position: right top;
+  opacity: 0.06;
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 639px) {
+  .artwork-light::before,
+  .artwork-dark::before {
+    display: none;
+  }
+}
+
+/* Keep the fill behind both text nodes and icons without extra markup. */
+.button-invert {
+  transition-duration: 350ms;
+}
+
+.button-invert::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--button-fg);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 350ms ease;
+  pointer-events: none;
+}
+
+.button-invert:focus-visible:not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+  color: var(--button-bg);
+}
+
+.button-invert:focus-visible:not(:disabled):not([aria-disabled="true"]):not([data-disabled])::before {
+  transform: scaleY(1);
+}
+
+@media (hover: hover) {
+  .button-invert:hover:not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+    color: var(--button-bg);
+  }
+
+  .button-invert:hover:not(:disabled):not([aria-disabled="true"]):not([data-disabled])::before {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-invert,
+  .button-invert::before {
+    transition: none;
+  }
+}
+
 :root {
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.025 305);
