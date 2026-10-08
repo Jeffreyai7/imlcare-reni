@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import BrandLogo from "./brand-logo";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   Sheet,
   SheetClose,
@@ -35,6 +36,7 @@ export default function Header() {
         >
           <BrandLogo />
         </Link>
+        <div className="flex items-center gap-3 lg:gap-6">
         <nav
           aria-label="Main navigation"
           className="hidden items-center gap-8 lg:flex"
@@ -59,6 +61,7 @@ export default function Header() {
             Request Care
           </Link>
         </nav>
+        <ThemeToggle />
         <Sheet>
           <SheetTrigger
             render={
@@ -106,6 +109,7 @@ export default function Header() {
             </nav>
           </SheetContent>
         </Sheet>
+        </div>
       </div>
     </header>
   );
