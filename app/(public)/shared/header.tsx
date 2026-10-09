@@ -32,9 +32,10 @@ export default function Header() {
         <Link
           href="/"
           aria-label="Impact Lives Care home"
-          className="flex items-center gap-2.5 rounded-md text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          className="flex shrink-0 items-center gap-2.5 rounded-md text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
-          <BrandLogo />
+          <BrandLogo className="size-10 rounded-lg lg:size-12" sizes="(min-width: 1024px) 48px, 40px" />
+          <span className="whitespace-nowrap text-lg font-semibold tracking-tight lg:text-xl">Iml care</span>
         </Link>
         <div className="flex items-center gap-3 lg:gap-6">
         <nav

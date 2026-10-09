@@ -1,13 +1,17 @@
+import type { Metadata } from "next";
+import AssessmentForm from "./assessment-form";
+
+export const metadata: Metadata = { title: "Patient Assessment | Impact Lives Care", description: "Tell us about your care needs with a guided five-step patient assessment." };
+
 export default function CareAssessmentPage() {
   return (
-    <section className="space-y-6">
-      <h1 className="text-3xl font-semibold text-primary">Care Assessment</h1>
-      <ol className="flex flex-wrap gap-4 text-sm">
-        <li className="rounded-lg bg-secondary px-4 py-3">1. Contact details</li>
-        <li className="rounded-lg bg-secondary px-4 py-3">2. Care needs</li>
-        <li className="rounded-lg bg-secondary px-4 py-3">3. Review</li>
-      </ol>
-      <p className="text-muted-foreground">The multi-step assessment form is coming soon. No information is collected on this page yet.</p>
+    <section aria-labelledby="assessment-heading" className="pb-8">
+      <div className="mx-auto mb-8 max-w-2xl text-center">
+        <p className="text-xs font-semibold tracking-[0.18em] text-primary">CARE THAT STARTS WITH YOU</p>
+        <h1 id="assessment-heading" className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Patient assessment</h1>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">A few details help us understand the support you or your loved one needs.</p>
+      </div>
+      <AssessmentForm />
     </section>
   );
 }
