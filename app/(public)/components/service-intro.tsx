@@ -1,23 +1,21 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, BookOpen, Building2, HeartPulse, Users } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import ServiceCarousel from "./service-carousel";
 
 const featuredServices = [
-  { title: "Nurse Home Visits", description: "Professional care in your home.", image: "/patient-bp.jpg", alt: "A nurse checking a patient's blood pressure at home" },
-  { title: "Caregiver Visits", description: "Compassionate everyday support.", image: "/patient-walker.jpg", alt: "A caregiver helping an older woman use her walking frame" },
-  { title: "Physiotherapy", description: "Rehabilitation and mobility.", image: "/patient-physio.jpg", alt: "A professional supporting a patient during mobility rehabilitation" },
+  { title: "Nurse Home Visits", description: "Professional care in your home.", image: "/kidsheartcheck.jpg", alt: "A healthcare professional checking a young child with a stethoscope" },
+  { title: "Caregiver Visits", description: "Compassionate everyday support.", image: "/nursewithbaby.jpg", alt: "A nurse holding a smiling young child" },
+  { title: "Physiotherapy", description: "Rehabilitation and mobility.", image: "/healthypic.jpg", alt: "Healthy foods, exercise equipment and health monitoring tools" },
 ];
 
 const additionalServices = [
-  { title: "Hospital Escort Services", description: "Support for hospital visits.", image: "/escortcare.jpg", alt: "A nurse accompanying a patient in a wheelchair at hospital" },
-  { title: "Lab Sample Collection", description: "Sample collection at home.", image: "/samplecollectimage.jpg", alt: "A nurse collecting a blood sample from a patient at home" },
-  { title: "Live-in Care", description: "Everyday support, right at home.", image: "/liveincare.jpg", alt: "A caregiver supporting an older woman resting in bed" },
+  { title: "Hospital Escort Services", description: "Support for hospital visits.", image: "/sethoscope2.jpg", alt: "A stethoscope resting on an open medical reference book" },
+  { title: "Lab Sample Collection", description: "Sample collection at home.", image: "/labcheck.jpg", alt: "A laboratory professional examining a sample" },
+  { title: "Live-in Care", description: "Everyday support, right at home.", image: "/bedrest.jpg", alt: "A nurse caring for a patient resting in bed" },
 ];
 
 const organizationServices = [
@@ -27,85 +25,59 @@ const organizationServices = [
   { title: "Community Outreach", icon: Users },
 ];
 
-const linkClassName = "inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-brand-purple-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring";
+
+const services = [...featuredServices, ...additionalServices];
+const serviceIds = ["nurse-home-visits", "caregiver-visits", "physiotherapy", "hospital-escort-services", "lab-sample-collection", "live-in-care"];
 
 export default function ServiceIntro() {
-  const reduceMotion = useReducedMotion();
-  const reveal = (index = 0) => ({
-    initial: { opacity: 1, y: 0 },
-    whileInView: reduceMotion ? { opacity: 1, y: 0 } : { opacity: [0, 1], y: [16, 0] },
-    viewport: { once: true, amount: 0.15 },
-    transition: { duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : index * 0.07, ease: "easeOut" as const },
-  });
-
   return (
-    <section aria-labelledby="services-intro-heading" className="relative isolate py-20 sm:py-24">
+    <section aria-labelledby="services-intro-heading" className="relative isolate py-20 sm:py-28">
       <div aria-hidden="true" className="absolute inset-y-0 -right-6 -left-6 -z-10 bg-surface-purple" />
-      <motion.div {...reveal()}>
-        <div className="flex flex-wrap items-center justify-between gap-4">
+      <div data-reveal className="flex flex-wrap items-end justify-between gap-6">
+        <div className="max-w-2xl">
           <p className="text-xs font-semibold tracking-[0.18em] text-primary sm:text-sm">OUR SERVICES</p>
-          <Link href="/services" className={linkClassName}>View all services<ArrowRight className="size-4" aria-hidden="true" /></Link>
+          <h2 id="services-intro-heading" className="mt-5 text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">A little support.<br />A lasting difference.</h2>
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">Expert care for every stage of life, shaped around your needs and delivered with compassion.</p>
         </div>
-        <h2 id="services-intro-heading" className="mt-6 text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">Care designed around your needs.</h2>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">From occasional professional support to ongoing care.</p>
-      </motion.div>
-
-      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {featuredServices.map((service, index) => (
-          <motion.article key={service.title} {...reveal(index)} className="h-full">
-            <Link href="/services" aria-label={`Learn more about ${service.title}`} className="group block h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
-            <Card className="h-full gap-0 rounded-2xl pt-0 pb-0 shadow-sm transition-[box-shadow] duration-300 group-hover:shadow-md group-hover:ring-primary/25 group-focus-visible:ring-primary/25 motion-reduce:transition-none">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image src={service.image} alt={service.alt} fill sizes="(min-width: 1152px) 352px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none" />
+        <Link href="/services" className={cn(buttonVariants({ variant: "outline" }), "h-12 gap-3 rounded-xl px-6")}>Explore our services<ArrowRight className="size-4" aria-hidden="true" /></Link>
+      </div>
+      <ServiceCarousel>
+        <CarouselContent className="-ml-6 items-stretch py-3">
+        {services.map((service, index) => (
+          <CarouselItem key={service.title} className="flex basis-full pl-6 md:basis-1/2 lg:basis-1/3" aria-label={service.title}>
+            <Link href={`/services#${serviceIds[index]}`} aria-label={`Learn more about ${service.title}`} className="service-card group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-primary/10 bg-card focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+              <div className="relative aspect-[16/11] overflow-hidden bg-muted">
+                <Image src={service.image} alt={service.alt} fill sizes="(min-width: 1152px) 352px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" className="service-card-image object-cover" />
               </div>
-              <CardContent className="flex flex-1 flex-col p-6">
+              <div className="flex flex-1 flex-col p-6 sm:p-7">
                 <h3 className="text-xl font-semibold tracking-tight text-foreground">{service.title}</h3>
                 <p className="mt-3 mb-6 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
-                <span className="mt-auto inline-flex items-center justify-between gap-3 border-t border-border pt-4 text-sm font-medium text-primary">Learn more<span className="flex size-8 items-center justify-center rounded-xl bg-secondary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><ArrowRight className="size-4" aria-hidden="true" /></span></span>
-              </CardContent>
-            </Card>
-            </Link>
-          </motion.article>
-        ))}
-      </div>
-
-      <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {additionalServices.map((service, index) => (
-          <motion.div key={service.title} {...reveal(index)}>
-            <Link href="/services" aria-label={`Learn more about ${service.title}`} className="group flex h-full items-center gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-primary/30 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring motion-reduce:transition-none">
-              <div className="relative size-16 shrink-0 overflow-hidden rounded-xl">
-                <Image src={service.image} alt={service.alt} fill sizes="64px" className="object-cover" />
+                <span className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-5 text-sm font-semibold text-primary">Discover this service<span className="service-card-arrow flex size-10 items-center justify-center rounded-full bg-secondary"><ArrowRight className="size-4" aria-hidden="true" /></span></span>
               </div>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-sm leading-snug font-semibold text-foreground">{service.title}</h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{service.description}</p>
-              </div>
-              <ArrowRight className="size-4 shrink-0 text-primary" aria-hidden="true" />
             </Link>
-          </motion.div>
+          </CarouselItem>
         ))}
-      </div>
-      <motion.section
-        {...reveal()}
-        aria-labelledby="organization-care-heading"
-        className="mt-16 rounded-2xl border border-border bg-card px-6 py-12 text-center shadow-sm sm:px-10 sm:py-16"
-      >
-        <p className="text-xs font-semibold tracking-[0.18em] text-primary sm:text-sm">CARE FOR ORGANIZATIONS</p>
-        <h3 id="organization-care-heading" className="mx-auto mt-6 max-w-2xl text-2xl leading-tight font-semibold tracking-tight text-foreground sm:text-3xl">
-          Healthcare solutions for healthier<br className="hidden sm:block" /> workplaces and communities.
-        </h3>
-        <ul className="mx-auto mt-8 grid max-w-xl gap-x-8 gap-y-5 text-left sm:grid-cols-2">
-          {organizationServices.map(({ title, icon: Icon }) => (
-            <li key={title} className="flex items-center gap-3 text-sm font-medium text-body-text">
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary"><Icon className="size-5" strokeWidth={1.75} aria-hidden="true" /></span>
-              {title}
-            </li>
-          ))}
-        </ul>
-        <Link href="/contact" className={cn(buttonVariants(), "mt-10 h-12 gap-3 rounded-xl px-6")}>
-          Talk to Our Team<ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
-      </motion.section>
+        </CarouselContent>
+      </ServiceCarousel>
+      <section data-reveal aria-labelledby="organization-care-heading" className="relative mt-12 overflow-hidden rounded-3xl bg-brand-purple-dark p-8 text-white sm:p-12">
+        <div aria-hidden="true" className="pointer-events-none absolute -top-24 -right-24 size-80 rounded-full border border-white/10" />
+        <div className="relative grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.18em] text-purple-200">CARE FOR ORGANIZATIONS</p>
+            <h3 id="organization-care-heading" className="mt-5 text-2xl leading-tight font-semibold tracking-tight text-white sm:text-3xl">Healthier teams.<br />Stronger communities.</h3>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">Practical healthcare support for the people at the heart of your organization.</p>
+            <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }), "mt-7 h-12 gap-3 rounded-xl border-white/30 bg-white px-6 text-brand-purple-dark [--button-bg:white] [--button-fg:var(--brand-purple-dark)]")}>Talk to our team<ArrowRight className="size-4" aria-hidden="true" /></Link>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {organizationServices.map(({ title, icon: Icon }) => (
+              <li key={title} className="rounded-2xl border border-white/15 bg-white/5 p-5">
+                <Icon className="mb-4 size-6 text-purple-200" strokeWidth={1.5} aria-hidden="true" />
+                <p className="text-sm font-medium text-white">{title}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </section>
   );
 }

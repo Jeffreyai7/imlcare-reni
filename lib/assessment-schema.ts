@@ -17,7 +17,6 @@ export const dailyActivities = [
   { value: "walking", label: "Walking" },
   { value: "bathing", label: "Bathing" },
   { value: "dressing", label: "Dressing" },
-  { value: "transfer", label: "Moving between bed and chair" },
 ] as const;
 export const independenceLevels = ["Independent", "Needs Assistance", "Dependent"] as const;
 export const healthQuestions = [

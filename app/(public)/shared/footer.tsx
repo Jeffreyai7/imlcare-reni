@@ -56,9 +56,9 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/15 pt-6 text-xs text-white/70 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 Impact Lives Care Ltd.</p>
-          <div className="flex items-center gap-6">
-            <span aria-disabled="true" title="Privacy policy coming soon">Privacy Policy</span>
-            <span aria-disabled="true" title="Terms coming soon">Terms</span>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link href="/privacy-policy" className={linkClassName}>Privacy Policy</Link>
+            <Link href="/terms-and-conditions" className={linkClassName}>Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>

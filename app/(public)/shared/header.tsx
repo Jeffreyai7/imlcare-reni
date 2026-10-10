@@ -24,6 +24,14 @@ const links = [
   { href: "/contact", label: "Contact" },
 ];
 
+function HeartbeatUnderline() {
+  return (
+    <svg aria-hidden="true" className="header-heartbeat" viewBox="0 0 100 16" fill="none" preserveAspectRatio="none">
+      <path d="M1 9H30L36 5L42 13L49 1L56 15L62 9H99" pathLength="100" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   return (
@@ -48,11 +56,11 @@ export default function Header() {
               href={href}
               aria-current={pathname === href ? "page" : undefined}
               className={cn(
-                "rounded-sm text-[1rem] font-medium transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring",
-                pathname === href ? "text-primary" : "text-muted-foreground",
+                "header-nav-link rounded-sm text-[1rem] font-medium transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring",
+                pathname === href ? "font-bold text-primary" : "text-muted-foreground",
               )}
             >
-              {label}
+              <span className="header-nav-label">{label}<HeartbeatUnderline /></span>
             </Link>
           ))}
           <Link
@@ -94,11 +102,11 @@ export default function Header() {
                   render={<Link href={href} />}
                   aria-current={pathname === href ? "page" : undefined}
                   className={cn(
-                    "rounded-lg px-4 py-3 text-base font-medium hover:bg-secondary",
-                    pathname === href && "bg-secondary text-primary",
+                    "header-nav-link rounded-lg px-4 py-3 text-base font-medium hover:bg-secondary",
+                    pathname === href && "bg-secondary font-bold text-primary",
                   )}
                 >
-                  {label}
+                  <span className="header-nav-label">{label}<HeartbeatUnderline /></span>
                 </SheetClose>
               ))}
               <SheetClose
