@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -91,11 +91,7 @@ export default function HomepageHero() {
                 key={benefit}
                 className="flex items-center gap-2 text-xs font-medium text-white/90"
               >
-                <Check
-                  className="size-4 shrink-0 text-white"
-                  strokeWidth={2.5}
-                  aria-hidden="true"
-                />
+                <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-white" />
                 {benefit}
               </li>
             ))}

@@ -69,13 +69,13 @@ export default function AboutPage() {
         aria-labelledby="who-we-are-heading"
         className="grid items-center gap-10 py-20 px-6 sm:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16"
       >
-        <div className="relative aspect-[4/5] max-h-[600px] overflow-hidden rounded-2xl bg-muted">
+        <div className="relative aspect-[4/5] bg-muted">
           <Image
-            src="/usimage.jpg"
+            src="/aboutus.jpg"
             alt="An illustration of healthcare professionals supporting a patient"
             fill
             sizes="(min-width: 1152px) 468px, (min-width: 1024px) 42vw, calc(100vw - 48px)"
-            className="object-contain p-6"
+            className="object-contain rounded-2xl"
           />
         </div>
         <div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
             id="who-we-are-heading"
             className="text-xs font-semibold tracking-[0.18em] text-primary sm:text-sm"
           >
-            WHO WE ARE
+            ABOUT US
           </h2>
           <p className="mt-5 text-2xl leading-snug font-semibold tracking-tight text-foreground sm:text-3xl">
             Professional care.

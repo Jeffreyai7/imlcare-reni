@@ -35,7 +35,7 @@ export function todayInLagos(date = new Date()) {
   return ["year", "month", "day"].map(type => parts.find(part => part.type === type)?.value).join("-");
 }
 
-const phone = z.string().trim().min(1, "Enter a phone number.").refine(value => /^[+\d\s()\-]+$/.test(value) && value.replace(/\D/g, "").length >= 7 && value.replace(/\D/g, "").length <= 15, "Enter a valid phone number with 7–15 digits.");
+const phone = z.string().trim().min(1, "Enter a phone number.").refine(value => /^[+\d\s()\-]+$/.test(value) && value.replace(/\D/g, "").length >= 7 && value.replace(/\D/g, "").length <= 15, "Enter a valid phone number with 7 to 15 digits.");
 const details = z.string().trim().max(2000, "Please use 2,000 characters or fewer.");
 const yesNo = z.enum(["", "No", "Yes"]);
 const independence = z.enum(["", ...independenceLevels]);

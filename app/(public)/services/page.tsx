@@ -5,7 +5,6 @@ import {
   ArrowRight,
   BookOpen,
   Building2,
-  Check,
   HeartPulse,
   Users,
 } from "lucide-react";
@@ -56,7 +55,7 @@ const homeServices = [
     title: "Physiotherapy",
     description:
       "Personalised rehabilitation support focused on movement, recovery and greater confidence in everyday activities.",
-    image: "/healthypic.jpg",
+    image: "/legphysio.avif",
     alt: "Healthy foods, exercise equipment and health monitoring tools",
     support: [
       "Mobility assessment",
@@ -70,7 +69,7 @@ const homeServices = [
     title: "Hospital Escort Services",
     description:
       "Support throughout hospital visits, with a caring professional by your side for appointments and the journey through care.",
-    image: "/sethoscope2.jpg",
+    image: "/escortwheel.jpg",
     alt: "A stethoscope resting on an open medical reference book",
     support: [
       "Appointment accompaniment",
@@ -220,10 +219,9 @@ export default function ServicesPage() {
                       key={item}
                       className="flex items-start gap-2.5 text-sm leading-relaxed text-body-text"
                     >
-                      <Check
-                        className="mt-0.5 size-4 shrink-0 text-primary"
-                        strokeWidth={2.5}
+                      <span
                         aria-hidden="true"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
                       />
                       {item}
                     </li>

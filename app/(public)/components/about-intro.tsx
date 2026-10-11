@@ -21,7 +21,7 @@ export default function AboutIntro() {
       </h2>
       <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
         Impact Lives Care brings professional and compassionate healthcare into
-        your home — where people feel safest, most relaxed, and most themselves.
+        your home, where people feel safest, most relaxed, and most themselves.
       </p>
       <Link
         href="/about"
