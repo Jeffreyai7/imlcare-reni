@@ -15,7 +15,7 @@ export default function HomepageHero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="homepage-hero relative isolate px-12 flex min-h-[600px] items-center lg:min-h-[650px] "
+      className="homepage-hero relative isolate flex min-h-[560px] items-start px-6 py-16 sm:min-h-[600px] sm:items-center sm:px-12 sm:py-20 lg:min-h-[650px] lg:py-16"
     >
       <div
         aria-hidden="true"
@@ -40,9 +40,9 @@ export default function HomepageHero() {
         ))}
         <div className="absolute inset-0 bg-linear-to-r from-[#24152f]/95 via-[#24152f]/70 to-[#24152f]/25" />
       </div>
-      <div className="w-full">
+      <div className="mx-auto w-full max-w-6xl min-w-0 text-left">
         <div>
-          <p className="mb-6 flex items-center gap-2.5 text-xs font-semibold tracking-[0.18em] text-white/90 sm:text-sm">
+          <p className="mb-5 flex items-center gap-2.5 sm:mb-6 text-xs font-semibold tracking-[0.18em] text-white/90 sm:text-sm">
             <span
               aria-hidden="true"
               className="size-2 rounded-full bg-brand-magenta"
@@ -51,17 +51,16 @@ export default function HomepageHero() {
           </p>
           <h1
             id="hero-heading"
-            className="max-w-xl text-[clamp(2.4rem,4.3vw,3.5rem)] leading-[1.12] font-semibold tracking-[-0.045em] text-white"
+            className="max-w-xl text-[clamp(2rem,8.5vw,2.5rem)] leading-[1.16] font-semibold tracking-[-0.035em] sm:text-[clamp(2.4rem,4.3vw,3.5rem)] sm:leading-[1.12] sm:tracking-[-0.045em] text-white"
           >
-            Professional healthcare
+            Professional healthcare,
             <br className="hidden sm:block" /> right where you
             <br className="hidden sm:block" /> feel at home.
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/90 sm:text-lg">
-            From nursing visits and live-in care to physiotherapy and lab sample
-            collection, we offer compassionate healthcare.
+          <p className="mt-6 max-w-[30ch] text-base leading-[1.75] sm:max-w-lg sm:leading-relaxed text-white/90 sm:text-lg">
+            Nursing, everyday support and rehabilitation, brought to you with care.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <div className="mt-9 flex max-w-sm flex-col gap-4 sm:mt-8 sm:max-w-none sm:flex-row">
             <Link
               href="/request-care"
               className={cn(
@@ -84,7 +83,7 @@ export default function HomepageHero() {
           </div>
           <ul
             aria-label="Our care commitments"
-            className="mt-9 flex max-w-xl flex-wrap gap-x-5 gap-y-3 border-t border-white/20 pt-6"
+            className="mt-9 hidden max-w-xl flex-wrap sm:flex gap-x-5 gap-y-3 border-t border-white/20 pt-6"
           >
             {benefits.map((benefit) => (
               <li
