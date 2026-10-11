@@ -11,42 +11,68 @@ export default function ViewportReveals({ children }: { children: ReactNode }) {
     const container = root.current;
     if (!container || !("IntersectionObserver" in window)) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const targets = Array.from(container.querySelectorAll<HTMLElement>("section, [data-reveal], article"))
-      .filter(element => !element.matches(".homepage-hero") && !element.closest(".homepage-hero")
-        && !element.querySelector("section, [data-reveal], article") && !element.closest("form"));
-    const animations = new Set<Animation>();
+    const selector = "h1, h2, h3, h4, h5, h6, p, dt, li";
+    const targets = Array.from(container.querySelectorAll<HTMLElement>(selector))
+      .filter(element => !element.querySelector(selector) && !element.closest("form, [aria-live], [role=alert]"));
+    const revealed = new WeakSet<HTMLElement>();
+    const animations = new Map<HTMLElement, Animation>();
+    const groupCounts = new Map<Element, number>();
+    const delays = new Map<HTMLElement, number>();
+    targets.forEach(element => {
+      const group = element.closest("section, footer") || container;
+      const index = groupCounts.get(group) || 0;
+      delays.set(element, (index % 4) * 70);
+      groupCounts.set(group, index + 1);
+    });
+
     const reveal = (element: HTMLElement, animate: boolean) => {
       element.removeAttribute("data-reveal-pending");
       observer.unobserve(element);
+      revealed.add(element);
       if (!animate || preference.matches) return;
       const animation = element.animate([
-        { opacity: 0, transform: "translateY(24px)" },
+        { opacity: 0, transform: "translateY(32px)" },
         { opacity: 1, transform: "translateY(0)" },
-      ], { duration: 700, delay: Number(element.dataset.revealDelay || 0), easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "backwards" });
-      animations.add(animation);
-      animation.onfinish = () => animations.delete(animation);
+      ], {
+        duration: 800,
+        delay: delays.get(element) || 0,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "backwards",
+      });
+      animations.set(element, animation);
+      animation.onfinish = () => animations.delete(element);
     };
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) reveal(entry.target as HTMLElement, true);
       });
-    }, { threshold: 0, rootMargin: "0px 0px -40px 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px -24px 0px" });
+
     const reset = () => {
       observer.disconnect();
       animations.forEach(animation => animation.cancel());
       animations.clear();
       targets.forEach(element => element.removeAttribute("data-reveal-pending"));
-      if (preference.matches) return;
       targets.forEach(element => {
-        // Keep already visible content steady when hydrating or navigating back.
-        if (element.getBoundingClientRect().top < window.innerHeight) return;
+        if (preference.matches || element.getBoundingClientRect().bottom <= 0) {
+          revealed.add(element);
+          return;
+        }
+        if (revealed.has(element)) return;
         element.setAttribute("data-reveal-pending", "");
         observer.observe(element);
       });
     };
     const onFocus = (event: FocusEvent) => {
-      const element = (event.target as HTMLElement).closest<HTMLElement>("[data-reveal-pending]");
-      if (element) reveal(element, false);
+      const focused = event.target as HTMLElement;
+      const pending = focused.closest<HTMLElement>("[data-reveal-pending]");
+      if (pending) reveal(pending, false);
+      animations.forEach((animation, element) => {
+        if (element.contains(focused)) {
+          animation.cancel();
+          animations.delete(element);
+        }
+      });
     };
     reset();
     preference.addEventListener("change", reset);

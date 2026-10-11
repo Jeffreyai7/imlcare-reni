@@ -11,8 +11,7 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      <ViewportReveals>{children}</ViewportReveals>
-      <Footer />
+      <ViewportReveals>{children}<Footer /></ViewportReveals>
       <WhatsAppButton />
     </>
   );
