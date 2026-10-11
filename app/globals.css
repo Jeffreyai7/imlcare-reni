@@ -329,3 +329,4 @@
 @media (prefers-reduced-motion: reduce) {
   .header-heartbeat path { transition: none; }
 }
+
